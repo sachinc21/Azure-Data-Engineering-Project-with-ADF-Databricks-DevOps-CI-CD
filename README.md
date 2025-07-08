@@ -22,7 +22,7 @@ This project demonstrates an **end-to-end batch data pipeline** using the **Pari
 
 ## 📦 Dataset
 
-- **Source**: [Kaggle - Paris Olympics 2024](https://www.kaggle.com/)
+- **Source**: [Kaggle - Paris Olympics 2024](https://www.youtube.com/redirect?event=video_description&redir_token=QUFFLUhqa0Q0amZqSUlQT1RYaGFDSVB0cnpBSmxELXM1d3xBQ3Jtc0tsajNla0pFdGpJaXNCOE0tWHVHUlNRZGtSSVRvLXFTdHQ1NnFrYURSMDJQejJVRHQyYWR1MTU3SUd0OGtwV3BhREdlang3T25sVVZrcEJ1LWlQa0h0Q2RiZnhJZkl6dVhkMDVPVVlnMTVEQ01WYk85dw&q=https%3A%2F%2Fwww.kaggle.com%2Fdatasets%2Fpiterfm%2Fparis-2024-olympic-summer-games&v=ESWqAZP2qA4)
 - Files Used:
   - `athletes.csv`
   - `coaches.csv`
@@ -45,30 +45,42 @@ This project demonstrates an **end-to-end batch data pipeline** using the **Pari
 - Use ADF to extract CSVs from GitHub & upload to Data Lake
 - Transform CSV to Parquet format
 - Store in Bronze container
-  ![Screenshot 2025-05-24 203558](https://github.com/user-attachments/assets/b702ee92-efdb-4c14-9a7d-b9c44e23b2ef)
+  ![Screenshot 2025-05-24 202851](https://github.com/user-attachments/assets/9299bb92-1c96-4366-a867-89bce7a12b47)
+
+### 🔹 Phase 3: CI/CD with Azure DevOps
+- Setup Azure DevOps Git repository
+- Implement branching strategy (main, feature branches)
+- 
+  ![Screenshot 2025-05-24 203352](https://github.com/user-attachments/assets/05388727-7517-494f-817e-a3063a059421)
+
+- Create pull requests & publish to Live Mode
+- 
+  ![Screenshot 2025-05-24 203318](https://github.com/user-attachments/assets/86a4a81f-8ad5-413f-a871-d06f3d1095be)
+
+- Generate ARM templates in `ADF_publish` branch
+
+  ![Screenshot 2025-05-24 203453](https://github.com/user-attachments/assets/3ae9b84e-4572-4a4c-83d1-b234375bebeb)
 
 
-### 🔹 Phase 3: Transformation (Silver Layer)
+### 🔹 Phase 4: Transformation (Silver Layer)
 - Create Databricks notebooks using PySpark
+- 
+  ![Screenshot 2025-05-24 203642](https://github.com/user-attachments/assets/bd4d0e7f-71fc-4cc1-84ba-3ceead35a6d9)
+
 - Clean, enrich, and join data
 - Store transformed data in Silver container
 
-### 🔹 Phase 4: Curation (Gold Layer)
+### 🔹 Phase 5: Curation (Gold Layer)
 - Create Delta Live Tables in Databricks
 - Produce business-ready curated tables
 - Enable dashboard/reporting-ready outputs
-
-### 🔹 Phase 5: CI/CD with Azure DevOps
-- Setup Azure DevOps Git repository
-- Implement branching strategy (main, feature branches)
-- Create pull requests & publish to Live Mode
-- Generate ARM templates in `ADF_publish` branch
+  ![Screenshot 2025-05-24 171328](https://github.com/user-attachments/assets/30f08e73-b82b-460c-b43f-4bc6b06b45fb)
 
 ---
 
 ## 🛠️ CI/CD Strategy
 
-- ✅ Feature Branches for development
-- ✅ Pull Requests for merging to main
-- ✅ `Publish` button triggers creation of ARM templates
-- ✅ Deployable code stored in `ADF_publish` branch
+- ✅ All ADF pipeline development was performed under feature branches.
+- ✅ Merged into the main branch via pull requests.
+- ✅ Changes published to ADF live mode only after peer review and approval.
+- ✅ ARM templates are auto-generated in the ADF_publish branch post-publish.
