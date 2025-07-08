@@ -67,8 +67,38 @@ This project demonstrates an **end-to-end batch data pipeline** using the **Pari
 - 
   ![Screenshot 2025-05-24 203642](https://github.com/user-attachments/assets/bd4d0e7f-71fc-4cc1-84ba-3ceead35a6d9)
 
-- Clean, enrich, and join data
-- Store transformed data in Silver container
+- Parameterized Notebook Design
+
+  ![Screenshot 2025-05-24 204439](https://github.com/user-attachments/assets/f1b0b9f8-0668-466f-bbc4-8e827b29f1ff)
+
+  #### PySpark Transformations
+
+  ```python
+  df_sorted = df_sorted.withColumnRenamed("code", "athlete_id")
+  df_sorted.display()
+  ```
+  ![Screenshot 2025-05-24 204327](https://github.com/user-attachments/assets/47998e1d-cf5b-4e07-a064-cc754e597c47)
+
+  ```python
+  df_sorted = df.sort('height', 'weight', ascending=[0,1]).filter(col('weight') > 0)
+  df_sorted.display()
+  ```
+  
+  ![Screenshot 2025-05-24 204249](https://github.com/user-attachments/assets/1a288000-6b84-40a0-8cb8-9381ad31bcde)
+
+  ```python
+  df_final.withColumn("cum_weight", sum("weight").over(Window.partitionBy("nationality").orderBy("height").rowsBetween(Window.unboundedPreceding, Window.unboundedFollowing))).display()
+  ```
+
+  ![Screenshot 2025-05-24 204408](https://github.com/user-attachments/assets/4b34725e-dc32-4777-a67f-ac49eef710b5)
+
+- Wrote transformed data into the silver container.
+```python
+df_final.write.format("delta") \
+        .mode("append") \
+        .option("path", "abfss://silver@projdl.dfs.core.windows.net/athletes") \
+        .saveAsTable("olympics.silver.athletes")
+```
 
 ### 🔹 Phase 5: Curation (Gold Layer)
 - Create Delta Live Tables in Databricks
