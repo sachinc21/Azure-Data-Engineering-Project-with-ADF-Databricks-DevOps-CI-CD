@@ -45,7 +45,7 @@ This project demonstrates an **end-to-end batch data pipeline** using the **Pari
 - Use ADF to extract CSVs from GitHub & upload to Data Lake
 - Transform CSV to Parquet format
 - Store in Bronze container
-  ![Screenshot 2025-05-24 202851](https://github.com/user-attachments/assets/9299bb92-1c96-4366-a867-89bce7a12b47)
+<img width="1868" height="836" alt="Screenshot 2025-05-24 202833" src="https://github.com/user-attachments/assets/c0f4fe86-2748-43d6-9536-c66b07a23009" />
 
 ### 🔹 Phase 3: CI/CD with Azure DevOps
 - Setup Azure DevOps Git repository
